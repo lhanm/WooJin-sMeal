@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MainTableVC.tableView(_:cellForRowAt:):MainTableVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.contentView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainTableVC.registNib():MainTableVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MainTableVC.tableView(_:viewForHeaderInSection:):MainTableVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.header">
+            </PersistentString>
+            <PersistentString
+               value = "tableView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

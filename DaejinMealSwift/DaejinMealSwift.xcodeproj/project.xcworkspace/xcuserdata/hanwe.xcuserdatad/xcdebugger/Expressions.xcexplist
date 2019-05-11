@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ViewController.seperateAndSetData(_:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "inputArr[3]">
+            </PersistentString>
+            <PersistentString
+               value = "g_mealMgr">
+            </PersistentString>
+            <PersistentString
+               value = "inputArr[0]">
+            </PersistentString>
+            <PersistentString
+               value = "KeywordDefine.PROFESSOR_PLACE_DEFINE">
+            </PersistentString>
+            <PersistentString
+               value = "inputArr[1]">
+            </PersistentString>
+            <PersistentString
+               value = "KeywordDefine.MORNING_MEAL_DEFINE">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainTableVC.tableView(_:numberOfRowsInSection:):MainTableVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tmpArr">
+            </PersistentString>
+            <PersistentString
+               value = "g_mealMgr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WeekTableVC.numberOfSections(in:):WeekTableVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "g_mealMgr.oneWeekData.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainTableVC.tableView(_:cellForRowAt:):MainTableVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "g_mealMgr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WeekTableVC.tableView(_:cellForRowAt:):WeekTableVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "g_mealMgr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.getMealInformation(year:month:day:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.viewDidLoad():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "g_mealMgr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WeekTableVC.tableView(_:viewForHeaderInSection:):WeekTableVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "g_mealMgr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WeekTableVC.tableView(_:numberOfRowsInSection:):WeekTableVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dayKeys![section/5]">
+            </PersistentString>
+            <PersistentString
+               value = "g_mealMgr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
