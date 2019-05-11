@@ -94,6 +94,7 @@ extension WeekTableVC: UITableViewDelegate {
             var dateArr = dayKeys?[section/5].components(separatedBy: "/")
             let dayOftheWeek:String = getDayOfTheWeek(section/5)
             headerView.topLabel?.text = "\(dateArr![0])월 \(dateArr![1])일 \(dayOftheWeek)요일"
+//            headerView.topLabel?.text = "\(dateArr![0])"
             headerView.middleLabel?.text = "학생회관"
             headerView.bottomLabel?.text = "점심"
             headerView.middleLabel.isHidden = false

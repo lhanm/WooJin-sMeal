@@ -51,7 +51,7 @@ class GetInforMationModule: NSObject {
                 print("response = \(response)")
             }
             let responseString = String(data: data, encoding: String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422)))
-            //print("responseString = \(responseString)")
+//            print("responseString = \(responseString)")
             let strData = Data(responseString!.utf8)
             let parser:TFHpple = TFHpple(htmlData: strData, encoding: "utf-8")
             let elements:Array = parser.search(withXPathQuery: "//td")
@@ -411,7 +411,12 @@ class GetInforMationModule: NSObject {
                     break
                 }
                 else{
-                    mealDataKey = inputArr[i+1]
+                    
+                    
+                    
+                    if !(inputArr[i+1] as String).hasSuffix("원"){//서버에서 데이터를 이상하게 내려주는경우가 있음. 원으로 끝날경우 데이터키로 정하지 않음.
+                        mealDataKey = inputArr[i+1]
+                    }
                     
                     if g_thisWeekData.thisWeekArr![0] != mealDataKey {
                         print("unexpected case mealDataKey wrong")
