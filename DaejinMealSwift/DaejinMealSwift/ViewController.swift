@@ -31,8 +31,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         refreshWeekDays()
-        g_getInformationModule.getMealInformation(year: self.todayYear, month: self.todayMonth, day: self.todayDay) {
-             DispatchQueue.main.async {
+        g_getInformationModule.getMealInforMationFromAFNetwork(year: self.todayYear,
+                                                               month: self.todayMonth,
+                                                               day: self.todayDay)
+        { (inputArr) in
+            self.g_getInformationModule.seperateAndSetData(inputArr)
+            DispatchQueue.main.async {
                 self.myTableView.reloadData()
             }
         }

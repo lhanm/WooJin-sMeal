@@ -15,6 +15,7 @@
 		4FFE56042238E73F0097F633 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE56032238E73F0097F633 /* MainTableViewCell.swift */; };
 		783F3130223E867E005AFEB6 /* RestaurantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783F312F223E867E005AFEB6 /* RestaurantVC.swift */; };
 		783F3132223E87E8005AFEB6 /* RandomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783F3131223E87E8005AFEB6 /* RandomVC.swift */; };
+		7841A49F2288198A00E98B4C /* WebAPIDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841A49E2288198A00E98B4C /* WebAPIDefine.swift */; };
 		784224A42233E64700B45E0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784224A32233E64700B45E0C /* AppDelegate.swift */; };
 		784224A62233E64700B45E0C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784224A52233E64700B45E0C /* ViewController.swift */; };
 		784224A92233E64700B45E0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 784224A72233E64700B45E0C /* Main.storyboard */; };
@@ -91,6 +92,7 @@
 		6323A057C52EBCEBE0226B4B /* Pods_DaejinMealSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DaejinMealSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		783F312F223E867E005AFEB6 /* RestaurantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantVC.swift; sourceTree = "<group>"; };
 		783F3131223E87E8005AFEB6 /* RandomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomVC.swift; sourceTree = "<group>"; };
+		7841A49E2288198A00E98B4C /* WebAPIDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAPIDefine.swift; sourceTree = "<group>"; };
 		784224A02233E64700B45E0C /* DaejinMealSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaejinMealSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		784224A32233E64700B45E0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		784224A52233E64700B45E0C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				785829C52234C63600304B72 /* KeywordDefine.swift */,
+				7841A49E2288198A00E98B4C /* WebAPIDefine.swift */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				788A5D542243DC5C00AA8E13 /* ConfigVC.swift in Sources */,
 				784A12072241285D001BE45B /* VersionVC.swift in Sources */,
 				783F3130223E867E005AFEB6 /* RestaurantVC.swift in Sources */,
+				7841A49F2288198A00E98B4C /* WebAPIDefine.swift in Sources */,
 				784224C42234029700B45E0C /* XPathQuery.m in Sources */,
 				784224CC2234123A00B45E0C /* String+HTMLParsing.swift in Sources */,
 				78BF1C2E223E05D4005DC1F3 /* WeekTableVC.swift in Sources */,

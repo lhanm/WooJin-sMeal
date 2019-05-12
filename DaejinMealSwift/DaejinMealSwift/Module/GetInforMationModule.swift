@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class GetInforMationModule: NSObject {
     
@@ -20,64 +21,40 @@ class GetInforMationModule: NSObject {
     {
     }
     
-    public func getMealInformation(year inputYear:String, month inputMonth:String,day inputDay:String,cloure: @escaping () -> ()) {
-        // 1. 전송할 값 준비
-        //        let userId = (self.userId.text)!
-        //        let name = (self.name.text)!
-        //        let param = ["userId": userId, "name": name] // JSON 객체로 변환할 딕셔너리 준비
-        //        let param = Dictionary<String, Any>()
-        //        let paramData = try! JSONSerialization.data(withJSONObject: param, options: [])
-        // 2. URL 객체 정의
-        //        let url = URL(string: "http://www.daejin.ac.kr/front/commonsmenulist.do?rYear=2018&rMonth=9&rDay=18");
-        //        print("http://www.daejin.ac.kr/front/commonsmenulist.do?rYear=\(inputYear)&rMonth=\(inputMonth)&rDay=\(inputDay)")
-        let url = URL(string: "http://www.daejin.ac.kr/front/commonsmenulist.do?rYear=\(inputYear)&rMonth=\(inputMonth)&rDay=\(inputDay)");
-        //        let url = URL(string: "https://www.naver.com")
-        // 3. URLRequest 객체 정의 및 요청 내용 담기
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
-        //        request.httpBody = paramData
-        request.timeoutInterval = 10
-        // 4. HTTP 메시지에 포함될 헤더 설정
-        request.addValue("application/xml, text/html, */*", forHTTPHeaderField: "Accept")
-        
-        // 5. URLSession 객체를 통해 전송 및 응답값 처리 로직 작성
-        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            let responseString = String(data: data, encoding: String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(0x0422)))
-//            print("responseString = \(responseString)")
-            let strData = Data(responseString!.utf8)
-            let parser:TFHpple = TFHpple(htmlData: strData, encoding: "utf-8")
-            let elements:Array = parser.search(withXPathQuery: "//td")
-            var dataArr:Array<String> = Array()
-            for i in 0 ..< elements.count {
-                let e:TFHppleElement = elements[i] as! TFHppleElement
-                //                print("raw \(i): \(e.raw!)")
-                if e.raw.contains("&#13;"){
-                    continue
+    public func getMealInforMationFromAFNetwork(year inputYear:String, month inputMonth:String,day inputDay:String,cloure: @escaping (Array<String>) -> ()){
+        Alamofire.request("\(WebAPIDefine.DAEJIN_GET_MEAL_DATA_API_DEFINE)?\(WebAPIDefine.DAEJIN_GET_MEAL_DATA_API_RQ_PARAM_YEAR_DEFINE)=\(inputYear)&\(WebAPIDefine.DAEJIN_GET_MEAL_DATA_API_RQ_PARAM_MONTH_DEFINE)=\(inputMonth)&\(WebAPIDefine.DAEJIN_GET_MEAL_DATA_API_RQ_PARAM_DAY_DEFINE)=\(inputDay)"
+            , method: .get, parameters: nil, encoding:URLEncoding.default)
+            .responseString { (response) in
+//                print("response :\(response)")
+                switch response.result{
+                case .success:
+                    let strData:Data = Data(response.value!.utf8)
+                    let parser:TFHpple = TFHpple(htmlData: strData, encoding: "utf-8")
+                    let elements:Array = parser.search(withXPathQuery: "//td")
+                    var dataArr:Array<String> = Array()
+                    for i in 0 ..< elements.count {
+                        let e:TFHppleElement = elements[i] as! TFHppleElement
+                        if e.raw.contains("&#13;"){
+                            continue
+                        }
+                        if e.raw.contains("<a href="){
+                            continue
+                        }
+                        var elementStr:String = e.raw.removeTDTag()
+//                        print("elementStr:\(elementStr)")
+                        elementStr = elementStr.replacingOccurrences(of: "&amp;", with: "&", options: .literal, range: nil)
+                        dataArr.append(elementStr)
+                    }
+                    cloure(dataArr)//closure호출
+                    break
+                case .failure(let error):
+                    print("error :\(error)")
+                    break
                 }
-                if e.raw.contains("<a href="){
-                    continue
-                }
-                var elementStr:String = e.raw.removeTDTag()
-                print("elementStr:\(elementStr)")
-                elementStr = elementStr.replacingOccurrences(of: "&amp;", with: "&", options: .literal, range: nil)
-                dataArr.append(elementStr)
-            }
-            self.seperateAndSetData(dataArr)
-            //closure호출
-            cloure()
         }
-        // 6. POST 전송
-        task.resume()
     }
-    func seperateAndSetData(_ inputArr:Array<String>) {
+    
+    public func seperateAndSetData(_ inputArr:Array<String>) {
         //        print("test \(inputArr)")
         
         for i in 0 ..< inputArr.count {
@@ -137,7 +114,6 @@ class GetInforMationModule: NSObject {
                             oneMeal[inputArr[j]] = inputArr[j+1]
                             //                            print("oneMeal: \(oneMeal)")
                             oneMealArr.append(oneMeal)
-                            
                         }
                     }
                     if(mealDataKey == ""){
@@ -171,7 +147,6 @@ class GetInforMationModule: NSObject {
                             oneMeal[inputArr[j]] = inputArr[j+1]
                             //                            print("oneMeal: \(oneMeal)")
                             oneMealArr.append(oneMeal)
-                            
                         }
                     }
                     if(mealDataKey == ""){
@@ -207,7 +182,6 @@ class GetInforMationModule: NSObject {
                             oneMeal[inputArr[j]] = inputArr[j+1]
                             //                            print("oneMeal: \(oneMeal)")
                             oneMealArr.append(oneMeal)
-                            
                         }
                     }
                     if(mealDataKey == ""){
@@ -241,7 +215,6 @@ class GetInforMationModule: NSObject {
                             oneMeal[inputArr[j]] = inputArr[j+1]
                             //                            print("oneMeal: \(oneMeal)")
                             oneMealArr.append(oneMeal)
-                            
                         }
                     }
                     if(mealDataKey == ""){
@@ -275,7 +248,6 @@ class GetInforMationModule: NSObject {
                             oneMeal[inputArr[j]] = inputArr[j+1]
                             //                            print("oneMeal: \(oneMeal)")
                             oneMealArr.append(oneMeal)
-                            
                         }
                     }
                     if(mealDataKey == ""){
@@ -411,9 +383,6 @@ class GetInforMationModule: NSObject {
                     break
                 }
                 else{
-                    
-                    
-                    
                     if !(inputArr[i+1] as String).hasSuffix("원"){//서버에서 데이터를 이상하게 내려주는경우가 있음. 원으로 끝날경우 데이터키로 정하지 않음.
                         mealDataKey = inputArr[i+1]
                     }
@@ -434,10 +403,8 @@ class GetInforMationModule: NSObject {
                 }
             }
         }
-        print("test: \(g_mealMgr.todayMealData.professorPlace)")
-        print("test2: \(g_mealMgr.todayMealData.studentPlace)")
-        print("test3: \(g_mealMgr.todayMealData.dormitory)")
-        
-        
+//        print("test: \(g_mealMgr.todayMealData.professorPlace)")
+//        print("test2: \(g_mealMgr.todayMealData.studentPlace)")
+//        print("test3: \(g_mealMgr.todayMealData.dormitory)")
     }
 }
