@@ -15,12 +15,6 @@ enum meal_place_widget {
     case meal_place_widget_dormitory
 }
 
-//enum meal_time {
-//    case meal_time_morning
-//    case meal_time_noon
-//    case meal_time_dinner
-//}
-
 class TodayViewController: UIViewController, NCWidgetProviding {
     
     //MARK: var
@@ -31,19 +25,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     var nowIndex:Int = 0
     var totalCnt:Int = 0
     
-    
     //MARK: outlet
     @IBOutlet var placeLabel: UILabel!
     @IBOutlet var menuLabel: UILabel!
     @IBOutlet var nextBtn: UIButton!
     @IBOutlet var beforeBtn: UIButton!
     
-    
     //MARK: lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.extensionContext?.widgetLargestAvailableDisplayMode = NCWidgetDisplayMode.expanded
-
+        //        self.extensionContext?.widgetLargestAvailableDisplayMode = NCWidgetDisplayMode.expanded
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         if checkToday(){
@@ -59,14 +51,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         
     }
-        
+    
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        // Perform any setup necessary in order to update the view.
-        
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
-        
         completionHandler(NCUpdateResult.newData)
     }
     
@@ -101,12 +87,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         if (g_mealMgr.todayYear == yearFormatter.string(from: date)) &&
             (g_mealMgr.todayMonth == monthFormatter.string(from: date)) &&
             (g_mealMgr.todayDay == dayFormatter.string(from: date)) {
-            print("today \(yearFormatter.string(from: date)) \(monthFormatter.string(from: date)) \(dayFormatter.string(from: date))")
-            print("saved \(g_mealMgr.todayYear) \(g_mealMgr.todayMonth) \(g_mealMgr.todayDay)")
+//            print("today \(yearFormatter.string(from: date)) \(monthFormatter.string(from: date)) \(dayFormatter.string(from: date))")
+//            print("saved \(g_mealMgr.todayYear) \(g_mealMgr.todayMonth) \(g_mealMgr.todayDay)")
         }
         else{
-            print("today \(yearFormatter.string(from: date)) \(monthFormatter.string(from: date)) \(dayFormatter.string(from: date))")
-            print("saved \(g_mealMgr.todayYear) \(g_mealMgr.todayMonth) \(g_mealMgr.todayDay)")
+//            print("today \(yearFormatter.string(from: date)) \(monthFormatter.string(from: date)) \(dayFormatter.string(from: date))")
+//            print("saved \(g_mealMgr.todayYear) \(g_mealMgr.todayMonth) \(g_mealMgr.todayDay)")
             g_mealMgr.todayYear = yearFormatter.string(from: date)
             g_mealMgr.todayMonth = monthFormatter.string(from: date)
             g_mealMgr.todayDay = dayFormatter.string(from: date)
@@ -131,7 +117,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 result = meal_time_enum.meal_time_dinner
             }
         }
-
+        
         return result
     }
     
@@ -142,18 +128,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 if value! == "student"{
                     self.targetPlace = meal_place_widget.meal_place_widget_student
                     self.placeLabel?.text = "학생회관"
-                    let tmpArr:Array<Any> = g_mealMgr.todayMealData.studentPlace[meal_time_enum.meal_time_lunch] as! Array<Any>
-                    if tmpArr.count > 0 {
-                        totalCnt = tmpArr.count
-                        if tmpArr.count <= 1 {
-                            self.nextBtn.isHidden = true
-                            self.beforeBtn.isHidden = true
-                            //                            self.menuLabel?.text = tmpArr[nowIndex]
+                    if g_mealMgr.todayMealData.professorPlace.count != 0 {
+                        let tmpArr:Array<Any> = g_mealMgr.todayMealData.studentPlace[meal_time_enum.meal_time_lunch] as! Array<Any>
+                        if tmpArr.count > 0 {
+                            totalCnt = tmpArr.count
+                            if tmpArr.count <= 1 {
+                                self.nextBtn.isHidden = true
+                                self.beforeBtn.isHidden = true
+                                //                            self.menuLabel?.text = tmpArr[nowIndex]
+                            }
+                            let tmpDic:Dictionary<String,String> = tmpArr[nowIndex] as! Dictionary<String, String>
+                            let keys = Array(tmpDic.keys).sorted()
+                            print("keys :\(keys)")
+                            self.menuLabel?.text = keys[0] as String
+                            
                         }
-                        let tmpDic:Dictionary<String,String> = tmpArr[nowIndex] as! Dictionary<String, String>
-                        let keys = Array(tmpDic.keys).sorted()
-                        print("keys :\(keys)")
-                        self.menuLabel?.text = keys[0] as String
                         
                     }
                     else {
@@ -163,7 +152,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 else if value! == "dormitory"{
                     self.targetPlace = meal_place_widget.meal_place_widget_dormitory
                     
-//
+                    //
                     let nowMealTime:meal_time_enum = getMealTime()
                     if nowMealTime == meal_time_enum.meal_time_morning{
                         self.placeLabel?.text = "생활관(아침)"
@@ -177,18 +166,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                     else{
                         self.placeLabel?.text = "알 수 없는 enum"
                     }
-                    let tmpArr:Array<Any> = g_mealMgr.todayMealData.dormitory[nowMealTime] as! Array<Any>
-                    if tmpArr.count > 0 {
-                        totalCnt = tmpArr.count
-                        if tmpArr.count <= 1 {
-//                            self.nextBtn.isHidden = true
-//                            self.beforeBtn.isHidden = true
-                            //                            self.menuLabel?.text = tmpArr[nowIndex]
+                    if g_mealMgr.todayMealData.dormitory.count != 0 {
+                        let tmpArr:Array<Any> = g_mealMgr.todayMealData.dormitory[nowMealTime] as! Array<Any>
+                        if tmpArr.count > 0 {
+                            totalCnt = tmpArr.count
+                            if tmpArr.count <= 1 {
+                            }
+                            let tmpDic:Dictionary<String,String> = tmpArr[nowIndex] as! Dictionary<String, String>
+                            let keys = Array(tmpDic.keys).sorted()
+                            self.menuLabel?.text = keys[0] as String
                         }
-                        let tmpDic:Dictionary<String,String> = tmpArr[nowIndex] as! Dictionary<String, String>
-                        let keys = Array(tmpDic.keys).sorted()
-//                        print("keys :\(keys)")
-                        self.menuLabel?.text = keys[0] as String
                     }
                     else {
                         self.menuLabel?.text = " - "
@@ -197,19 +184,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 else if value! == "professor"{
                     self.targetPlace = meal_place_widget.meal_place_widget_professor
                     self.placeLabel?.text = "교수회관"
-                    let tmpArr:Array<Any> = g_mealMgr.todayMealData.professorPlace[meal_time_enum.meal_time_lunch] as! Array<Any>
-                    if tmpArr.count > 0 {
-                        totalCnt = tmpArr.count
-                        if tmpArr.count <= 1 {
-//                            self.nextBtn.isHidden = true
-//                            self.beforeBtn.isHidden = true
-                            //                            self.menuLabel?.text = tmpArr[nowIndex]
+                    if g_mealMgr.todayMealData.professorPlace.count != 0 {
+                        let tmpArr:Array<Any> = g_mealMgr.todayMealData.professorPlace[meal_time_enum.meal_time_lunch] as! Array<Any>
+                        if tmpArr.count > 0 {
+                            totalCnt = tmpArr.count
+                            if tmpArr.count <= 1 {
+                            }
+                            let tmpDic:Dictionary<String,String> = tmpArr[nowIndex] as! Dictionary<String, String>
+                            let keys = Array(tmpDic.keys).sorted()
+                            print("keys :\(keys)")
+                            self.menuLabel?.text = keys[0] as String
+                            
                         }
-                        let tmpDic:Dictionary<String,String> = tmpArr[nowIndex] as! Dictionary<String, String>
-                        let keys = Array(tmpDic.keys).sorted()
-                        print("keys :\(keys)")
-                        self.menuLabel?.text = keys[0] as String
-                        
                     }
                     else {
                         self.menuLabel?.text = " - "
@@ -222,19 +208,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             else{
                 self.targetPlace = meal_place_widget.meal_place_widget_student
                 self.placeLabel?.text = "학생회관"
-                let tmpArr:Array<Any> = g_mealMgr.todayMealData.studentPlace[meal_time_enum.meal_time_lunch] as! Array<Any>
-                if tmpArr.count > 0 {
-                    totalCnt = tmpArr.count
-                    if tmpArr.count <= 1 {
-                        self.nextBtn.isHidden = true
-                        self.beforeBtn.isHidden = true
-                        //                            self.menuLabel?.text = tmpArr[nowIndex]
+                if g_mealMgr.todayMealData.studentPlace.count != 0 {
+                    let tmpArr:Array<Any> = g_mealMgr.todayMealData.studentPlace[meal_time_enum.meal_time_lunch] as! Array<Any>
+                    if tmpArr.count > 0 {
+                        totalCnt = tmpArr.count
+                        if tmpArr.count <= 1 {
+                            self.nextBtn.isHidden = true
+                            self.beforeBtn.isHidden = true
+                        }
+                        let tmpDic:Dictionary<String,String> = tmpArr[nowIndex] as! Dictionary<String, String>
+                        let keys = Array(tmpDic.keys).sorted()
+                        print("keys :\(keys)")
+                        self.menuLabel?.text = keys[0] as String
+                        
                     }
-                    let tmpDic:Dictionary<String,String> = tmpArr[nowIndex] as! Dictionary<String, String>
-                    let keys = Array(tmpDic.keys).sorted()
-                    print("keys :\(keys)")
-                    self.menuLabel?.text = keys[0] as String
-                    
                 }
                 else {
                     self.menuLabel?.text = " - "

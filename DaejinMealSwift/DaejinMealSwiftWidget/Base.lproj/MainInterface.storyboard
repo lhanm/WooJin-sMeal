@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,9 +30,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80p-8M-gnX">
-                                                <rect key="frame" x="18" y="34" width="272" height="58"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80p-8M-gnX">
+                                                <rect key="frame" x="0.0" y="26" width="290" height="74"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -40,6 +39,10 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="0.29757063356164382" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="80p-8M-gnX" firstAttribute="leading" secondItem="scP-Bi-9CN" secondAttribute="leading" id="CUc-UU-kkt"/>
+                                            <constraint firstAttribute="bottom" secondItem="80p-8M-gnX" secondAttribute="bottom" id="DS3-qh-KlR"/>
+                                            <constraint firstItem="80p-8M-gnX" firstAttribute="top" secondItem="vNp-HQ-iu0" secondAttribute="bottom" id="aYB-bW-nNn"/>
+                                            <constraint firstAttribute="trailing" secondItem="80p-8M-gnX" secondAttribute="trailing" id="hiK-n1-oQm"/>
                                             <constraint firstItem="vNp-HQ-iu0" firstAttribute="top" secondItem="scP-Bi-9CN" secondAttribute="top" constant="5" id="vzz-gs-CK4"/>
                                             <constraint firstItem="vNp-HQ-iu0" firstAttribute="centerX" secondItem="scP-Bi-9CN" secondAttribute="centerX" id="zO2-jU-p44"/>
                                         </constraints>
