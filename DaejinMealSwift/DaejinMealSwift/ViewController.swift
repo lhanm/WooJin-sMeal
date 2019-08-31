@@ -86,6 +86,7 @@ class ViewController: UIViewController {
 }
 
 extension UINavigationController {
+    
     override open var shouldAutorotate: Bool {
         return false
     }
