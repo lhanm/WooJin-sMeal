@@ -85,3 +85,12 @@ class ViewController: UIViewController {
 
 }
 
+extension UINavigationController {
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+}
